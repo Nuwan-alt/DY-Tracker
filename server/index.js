@@ -68,6 +68,7 @@ app.get('/products',async (req,res) =>{
 
 // ============================= get product by category ===============================
 app.get('/products/:type',async (req,res) =>{
+    console.log(req.params.type);
     if (req.params.type == null){
         res.send("invalid request");
     }else{
@@ -91,7 +92,7 @@ app.get('/products/:type',async (req,res) =>{
 }
 })
 
-//============================ get all users =============================================
+//============================ get all users ========= **** ====================================
 app.get('/users',async (req,res) =>{
     try {
         const result = await db.query(
@@ -109,7 +110,7 @@ app.get('/users',async (req,res) =>{
     }
 })
 
-//============================ add user ======================================
+//============================ add user ============= **** =========================
 app.post('/add',async (req,res) =>{
     const userName = req.body.userName;
     const name = req.body.name;
@@ -132,7 +133,7 @@ app.post('/add',async (req,res) =>{
     
 })
 
-//======================== make a user as a admin ================================
+//======================== make a user as a admin ========= **** add user admin table======
 
 app.put('/make_admin/:userName',async (req,res) =>{
     const userName = req.params.userName;

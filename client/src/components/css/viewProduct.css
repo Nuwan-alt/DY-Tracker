@@ -1,0 +1,103 @@
+.list{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.title{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 72px;
+  background: -webkit-linear-gradient(#eee, rgb(18, 13, 145));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+.productList{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.productList button{
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 370px;
+    height: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
+    background-color: rgb(107, 107, 225);
+
+}
+
+.productList button:hover{
+    width: 375px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    background-color: rgb(62, 62, 228);
+}
+
+.productList select{
+    
+    margin-bottom: 10px;
+    font-size: 17px;
+    width: 370px;
+    height: 35px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.productList label{
+    
+    font-size: 20px;
+
+}
+
+.grid{
+    margin: 30px 10% 10px 10%;
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+
+}
+
+.setInVar{
+    
+    padding: 10px;
+    height: auto;
+    background-color: rgb(232, 229, 207);
+    
+}
+
+.setInVar span{
+    font-weight: bold;
+}
+
+.setInVar button{
+    width: 40%;
+    height: 30%;
+    justify-content: center;
+    align-items:center;
+    margin-top: 20px;
+    background-color: rgb(237, 125, 125);
+}
+
+.setInVar button:hover{
+    width: 40%;
+    height: 30%;
+    cursor: pointer;
+    justify-content: center;
+    align-items:center;
+    margin-top: 20px;
+    background-color: rgb(240, 11, 11);
+}
+

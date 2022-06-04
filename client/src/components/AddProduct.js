@@ -24,9 +24,9 @@ export default function AddProduct(){
     return (
         <div>
             <div className='list' >
-  <div>
+                <div>
                     <h1 className='title'>Add Product</h1>
-         </div>
+                </div>
 
                 <div className='information'>
                     <label >Titlee </label>

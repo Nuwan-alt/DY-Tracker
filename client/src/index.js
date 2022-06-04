@@ -3,11 +3,12 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AddProduct  from './components/AddProduct';
+import ViewProducts  from './components/viewProduts';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <AddProduct/>
+    <ViewProducts/>
   </React.StrictMode>
 );
 
