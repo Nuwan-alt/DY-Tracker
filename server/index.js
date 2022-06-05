@@ -92,11 +92,12 @@ app.get('/products/:type',async (req,res) =>{
 }
 })
 
-//============================ get all users ========= **** ====================================
-app.get('/users',async (req,res) =>{
+//============================ get all users by type ===============================================
+app.get('/users/:type',async (req,res) =>{
+    const type = req.params.type;
     try {
         const result = await db.query(
-            "SELECT * FROM users"
+            "SELECT * FROM "+ type
             
         );
         if( result.length == 0){
@@ -110,20 +111,26 @@ app.get('/users',async (req,res) =>{
     }
 })
 
-//============================ add user ============= **** =========================
-app.post('/add',async (req,res) =>{
-    const userName = req.body.userName;
-    const name = req.body.name;
-    const status = req.body.status;
-    console.log([userName,name,status]);
 
-    if (userName == null || name == null || status == null){
+
+//============================ add user by type =========================================
+app.post('/add/:type',async (req,res) =>{
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const userName = req.body.userName;
+    const email = req.body.email;
+    const contactNum = req.body.contactNum;
+    const type = req.params.type;
+    console.log([firstName,lastName,userName,email,contactNum]);
+
+    if (firstName == null || lastName == null || userName == null || email == null || contactNum == null){
         res.send("data can't be empty");
     }else{
         try {
+           
             const result = await db.query(
-                "INSERT INTO users (userName, name , status) VALUES(?,?,?)",
-                [userName,name,status]
+                "INSERT INTO "+type+ " (firstName, lastName , userName, email, contactNum) VALUES(?,?,?,?,?)",
+                [firstName,lastName,userName,email,contactNum]
             );
             res.send("data inserted");
         } catch (err) {
@@ -133,10 +140,14 @@ app.post('/add',async (req,res) =>{
     
 })
 
+// =======================Delete a User ======================================
+
+
+
 //======================== make a user as a admin ========= **** add user admin table======
 
-app.put('/make_admin/:userName',async (req,res) =>{
-    const userName = req.params.userName;
+app.put('/make_admin/:id',async (req,res) =>{
+    const id = req.params.userName;
     if(userName == null){
         res.send("No user exist with username:" + userName);
     }else{

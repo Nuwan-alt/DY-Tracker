@@ -4,11 +4,12 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AddProduct  from './components/AddProduct';
 import ViewProducts  from './components/viewProduts';
+import ViewUsers  from './components/viewUsers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ViewProducts/>
+    <ViewUsers/>
   </React.StrictMode>
 );
 

@@ -68,10 +68,7 @@ export default function ViewProducts(){
                      })}
                 </div>
 
-                
-                
-                
-               
+ 
             </div>
             
         </div>
