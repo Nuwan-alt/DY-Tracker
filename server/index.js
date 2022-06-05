@@ -117,22 +117,21 @@ app.get('/users/:type',async (req,res) =>{
 app.post('/add/:type',async (req,res) =>{
     const firstName = req.body.firstName;
     const lastName = req.body.lastName;
-    const userName = req.body.userName;
     const email = req.body.email;
     const contactNum = req.body.contactNum;
     const type = req.params.type;
     console.log([firstName,lastName,userName,email,contactNum]);
 
-    if (firstName == null || lastName == null || userName == null || email == null || contactNum == null){
+    if (firstName == null || lastName == null || email == null || contactNum == null){
         res.send("data can't be empty");
     }else{
         try {
            
             const result = await db.query(
-                "INSERT INTO "+type+ " (firstName, lastName , userName, email, contactNum) VALUES(?,?,?,?,?)",
-                [firstName,lastName,userName,email,contactNum]
+                "INSERT INTO "+type+ " (firstName, lastName , email, contactNum) VALUES(?,?,?,?)",
+                [firstName,lastName,email,contactNum]
             );
-            res.send("data inserted");
+            res.send("Data Inserted");
         } catch (err) {
             throw err;
         }
@@ -140,8 +139,51 @@ app.post('/add/:type',async (req,res) =>{
     
 })
 
+//============================== Add Admin =======================================
+app.post('/add_admin',async (req,res) =>{
+    const firstName = req.body.firstName;
+    const lastName = req.body.lastName;
+    const email = req.body.email;
+    const contactNum = req.body.contactNum;
+    
+    
+
+    if (firstName == null || lastName == null || email == null || contactNum == null){
+        res.send("data can't be empty");
+    }else{
+        try {
+           
+            const result = await db.query(
+                "INSERT INTO admin (firstName, lastName , email, contactNum) VALUES(?,?,?,?)",
+                [firstName,lastName,email,contactNum]
+            );
+            res.send("Data Inserted");
+        } catch (err) {
+            throw err;
+        }
+    }
+    
+})
 // =======================Delete a User ======================================
 
+app.delete('/delete/:type',async (req,res) =>{
+
+    if (firstName == null || lastName == null || email == null || contactNum == null){
+        res.send("data can't be empty");
+    }else{
+        try {
+           
+            const result = await db.query(
+                "INSERT INTO "+type+ " (firstName, lastName , email, contactNum) VALUES(?,?,?,?)",
+                [firstName,lastName,email,contactNum]
+            );
+            res.send("Data Inserted");
+        } catch (err) {
+            throw err;
+        }
+    }
+    
+})
 
 
 //======================== make a user as a admin ========= **** add user admin table======

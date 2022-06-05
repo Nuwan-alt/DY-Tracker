@@ -3,13 +3,14 @@ import ReactDOM from 'react-dom/client';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import AddProduct  from './components/AddProduct';
+import AddAdmin  from './components/AddAdmin';
 import ViewProducts  from './components/viewProduts';
 import ViewUsers  from './components/viewUsers';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <ViewUsers/>
+    <AddAdmin/>
   </React.StrictMode>
 );
 
