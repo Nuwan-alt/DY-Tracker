@@ -29,17 +29,18 @@ app.post('/new',async (req,res) => {
     const quantity = req.body.quantity;
     const price = req.body.price;
     const category = req.body.category ;
-    console.log([title,quantity,price,category]);
+    const s_email = req.body.s_email;
+    
 
-    if (title == null || quantity == null || price==null){
+    if (title == null || quantity == null || price==null || s_email==null){
         console.log("can't be empty");
     }
     
 
     try {
         const result = await db.query(
-            "INSERT INTO products (title, quantity , price,category) VALUES(?,?,?,?)",
-            [title,quantity,price,category]
+            "INSERT INTO products (title, quantity , price,category,s_email) VALUES(?,?,?,?,?)",
+            [title,quantity,price,category,s_email]
         );
         res.send("data inserted");
     } catch (err) {
@@ -49,10 +50,12 @@ app.post('/new',async (req,res) => {
 })
 
 // ======================== get all products =============================================
-app.get('/products',async (req,res) =>{
+app.get('/productsBySeller/:email',async (req,res) =>{
+    const email = req.params.email;
+    
     try {
         const result = await db.query(
-            "SELECT * FROM products"
+            "SELECT * FROM products where s_email =?",[email]
             
         );
         if( result == null){
@@ -67,24 +70,27 @@ app.get('/products',async (req,res) =>{
 })
 
 // ============================= get product by category ===============================
-app.get('/products/:type',async (req,res) =>{
-    console.log(req.params.type);
-    if (req.params.type == null){
+app.get('/productsBySeller/:email/:category',async (req,res) =>{
+    
+    if (req.params.email == "" || req.params.category==null){
         res.send("invalid request");
     }else{
-        const typeofCet = req.params.type;
+        const email = req.params.email;
+        const category = req.params.category;
     
     try {
-        const query = "SELECT * FROM products WHERE category = ?" ;
+        
         const result = await db.query(
-            query,[typeofCet]
+            'SELECT * FROM products WHERE category = ? AND s_email = ?',
+            [category,email]
             
         );
-        if( result.length == 0){
-            res.send("No data");
-        }else{
-            res.send(result);
-        }
+        res.send(result);
+        // if( result.length == 0){
+        //     res.send("No data");
+        // }else{
+        //     res.send(result );
+        // }
        
     } catch (err) {
         throw err;
@@ -120,7 +126,7 @@ app.post('/add/:type',async (req,res) =>{
     const email = req.body.email;
     const contactNum = req.body.contactNum;
     const type = req.params.type;
-    console.log([firstName,lastName,userName,email,contactNum]);
+    
 
     if (firstName == null || lastName == null || email == null || contactNum == null){
         res.send("data can't be empty");
@@ -166,23 +172,22 @@ app.post('/add_admin',async (req,res) =>{
 })
 // =======================Delete a User ======================================
 
-app.delete('/delete/:type',async (req,res) =>{
+app.delete('/del_product/:id',async (req,res) =>{
+    console.log("maria Db");
+    const id = req.params.id;
+    const query = 'DELETE FROM products WHERE p_id = ?';
 
-    if (firstName == null || lastName == null || email == null || contactNum == null){
-        res.send("data can't be empty");
-    }else{
-        try {
+    try {
            
-            const result = await db.query(
-                "INSERT INTO "+type+ " (firstName, lastName , email, contactNum) VALUES(?,?,?,?)",
-                [firstName,lastName,email,contactNum]
-            );
-            res.send("Data Inserted");
-        } catch (err) {
-            throw err;
-        }
+        const result = await db.query(
+            query,
+            [id]
+        );
+        res.send("Item Deleted");
+    } catch (err) {
+        throw err;
     }
-    
+
 })
 
 

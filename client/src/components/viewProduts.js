@@ -6,22 +6,52 @@ import Axios from "axios";
 export default function ViewProducts(){
     
     const [category, setCategory] = useState("other");
+    const [s_email, setS_email] = useState("");
+    const [p_id, setP_id] = useState("");
     const [productList,setProductList] = useState([]);
 
+    
 
     const recieveProduct =() =>{
-        
-        Axios.get('http://localhost:5000/products').then((products) => {
+        if(s_email == ""){
+            alert("Please Enter Your email");
+        }
+        Axios.get('http://localhost:5000/productsBySeller/'+s_email).then((products) => {
             setProductList(products.data);    
-            console.log(products.data);
+            
             })
     };
 
+    const handleDelete=(id)=>{
+        
+        setP_id(id);
+        console.log(p_id);
+        deleteProduct();
+     }
+
+    const deleteProduct =() =>{
+        console.log("harry Potter");
+        Axios.delete('http://localhost:5000/del_product/'+p_id).then(()=>{
+            console.log("harry Potter");
+        })
+            
+           
+    };
+
+
+
     const recieveProductByCategory =() =>{
         
-        Axios.get('http://localhost:5000/products/'+category).then((products) => {
-            setProductList(products.data); 
-            console.log(products.data);
+        if(s_email == ""){
+            alert("Please Enter Your email");
+        }
+        Axios.get('http://localhost:5000/productsBySeller/' + s_email + '/' + category).then((products) => {
+            
+        if(products.data.length == 0){
+            alert("No Data");
+        }
+        setProductList(products.data); 
+
             })
     };
 
@@ -33,12 +63,11 @@ export default function ViewProducts(){
                 </div>
 
                 <div className='productList'>
+                    <label >Confirm Your email</label>
+                    <input type="text" onChange={(event) => setS_email(event.target.value)} placeholder="enter your email"/>
+
                     <button onClick={recieveProduct}> Check all Produts</button>
                     
-                    
-
-                    <button onClick={recieveProductByCategory}> Check Produts By Category</button>
-                        
                         <label>Category</label>
                         <select onChange={(event) => setCategory(event.target.value)}>
                             <option value="other">Other</option>
@@ -46,6 +75,8 @@ export default function ViewProducts(){
                             <option value="veg">Vegetable</option>
                             <option value="bakery">Bakery</option>  
                         </select>
+
+                        <button onClick={recieveProductByCategory}> Check Produts By Category</button>
                     
                 </div>
                 
@@ -61,7 +92,9 @@ export default function ViewProducts(){
                                <br/>
                                <span>CATEGORY : </span> {val.category}
                                 <br/>
-                               <button >DELETE</button>
+                               <button onClick={() =>
+                                   console.log(val.p_id)
+                               }>DELETE</button>
                             </div>
                        
                         )

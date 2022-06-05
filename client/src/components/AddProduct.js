@@ -8,6 +8,7 @@ export default function AddProduct(){
     const [quantity,setQuantity] = useState(0);
     const [price, setPrice] = useState("00");
     const [category, setCategory] = useState("other");
+    const [s_email, setS_email] = useState("");
 
     const sendProduct =() =>{
         
@@ -16,6 +17,7 @@ export default function AddProduct(){
             quantity:quantity,
             price:price,
             category:category,
+            s_email:s_email,
             }).then(() => {
                 console.log("Done");
             })
@@ -38,6 +40,8 @@ export default function AddProduct(){
                     <label >Price</label>
                     <input type="text" onChange={(event) => setPrice(event.target.value)}/>
 
+                    
+
 
                     <label>Category</label>
                     <select onChange={(event) => setCategory(event.target.value)}>
@@ -45,13 +49,13 @@ export default function AddProduct(){
                         <option value="fruit">Fruit</option>
                         <option value="veg">Vegetable</option>
                         <option value="bakery">Bakery</option>
-                        
                     </select>
+
+                    <label >Confirm Order</label>
+                    <input type="text" onChange={(event) => setS_email(event.target.value)} placeholder="enter your email"/>
                     <button onClick={sendProduct}> Add Product </button>
                 </div>
-
-                
-                    
+       
             </div>
         </div>
         

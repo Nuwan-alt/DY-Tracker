@@ -26,7 +26,7 @@
 
 }
 
-.productList button{
+.productList  button {
     margin-top: 20px;
     margin-bottom: 10px;
     font-size: 16px;
@@ -35,6 +35,19 @@
     margin-left: 10px;
     margin-right: 10px;
     background-color: rgb(107, 107, 225);
+
+}
+
+.productList  input {
+    padding-left: 20px;
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 16px;
+    width: 340px;
+    height: 28px;
+    margin-left: 10px;
+    margin-right: 10px;
+    
 
 }
 
