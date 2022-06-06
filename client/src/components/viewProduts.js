@@ -7,7 +7,7 @@ export default function ViewProducts(){
     
     const [category, setCategory] = useState("other");
     const [s_email, setS_email] = useState("");
-    const [p_id, setP_id] = useState("");
+    // const [p_id, setP_id] = useState("0");
     const [productList,setProductList] = useState([]);
 
     
@@ -23,13 +23,14 @@ export default function ViewProducts(){
     };
 
     const handleDelete=(id)=>{
-        
-        setP_id(id);
-        console.log(p_id);
-        deleteProduct();
+        console.log("log"+id);
+         deleteProduct(id);
+         alert("Item Deleted");
+         window.location.reload(false);
+         
      }
 
-    const deleteProduct =() =>{
+    const deleteProduct =(p_id) =>{
         console.log("harry Potter");
         Axios.delete('http://localhost:5000/del_product/'+p_id).then(()=>{
             console.log("harry Potter");
@@ -69,6 +70,7 @@ export default function ViewProducts(){
                     <button onClick={recieveProduct}> Check all Produts</button>
                     
                         <label>Category</label>
+
                         <select onChange={(event) => setCategory(event.target.value)}>
                             <option value="other">Other</option>
                             <option value="fruit">Fruit</option>
@@ -93,7 +95,8 @@ export default function ViewProducts(){
                                <span>CATEGORY : </span> {val.category}
                                 <br/>
                                <button onClick={() =>
-                                   console.log(val.p_id)
+                                   
+                                   handleDelete(val.p_id)
                                }>DELETE</button>
                             </div>
                        
