@@ -88,7 +88,7 @@ export default function ViewProducts(){
                         return (
                         
                             <div className='setInVar' >
-                                
+                                <img ></img>
                                 
                                <span> TITLE :</span>  {val.title}
                                <br/>
