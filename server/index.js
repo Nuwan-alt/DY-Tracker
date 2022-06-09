@@ -119,11 +119,9 @@ app.get('/users/:type',async (req,res) =>{
             "SELECT * FROM "+ type
             
         );
-        if( result.length == 0){
-            res.send("No data");
-        }else{
-            res.send(result);
-        }
+       
+
+        res.send(result);
        
     } catch (err) {
         throw err;
@@ -183,12 +181,34 @@ app.post('/add_admin',async (req,res) =>{
     }
     
 })
-// =======================Delete a User ======================================
+// =======================Delete a Product ======================================
 
 app.delete('/del_product/:id',async (req,res) =>{
     console.log("maria Db");
     const id = req.params.id;
     const query = 'DELETE FROM products WHERE p_id = ?';
+
+    try {
+           
+        const result = await db.query(
+            query,
+            [id]
+        );
+        res.send("Item Deleted");
+    } catch (err) {
+        throw err;
+    }
+
+})
+
+// ======================Delete a User ================================
+app.delete('/del_user/:type/:id',async (req,res) =>{
+    console.log("maria Db");
+    const type = req.params.type;
+    const id = req.params.id;
+    console.log([type,id])
+    const query = 'DELETE FROM '+type + ' WHERE u_id = '+id;
+    
 
     try {
            

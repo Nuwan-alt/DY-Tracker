@@ -14,16 +14,39 @@ export default function ViewUsers(){
             setUserList([]);
             return;
         } 
+
+        
         Axios.get('http://localhost:5000/users/'+showRole).then((users) => {
-            setUserList(users.data); 
-            console.log(users.data);
+        console.log(users.data);
+        
+        if(users.data.length == 0){
+            alert("No Data");
+        }
+        setUserList(users.data); 
+         
             })
+
+            
     };
 
-    
-    
+    const handleDelete=(id)=>{
+         deleteProduct(id);
+         alert("Item Deleted");
+         window.location.reload(false);
+         
+     }
 
+     const deleteProduct =(id) =>{
+        let showRole = setRoleOut(role);
+        
+        console.log("role:" +showRole);
+        Axios.delete('http://localhost:5000/del_user/'+showRole+'/'+id).then(()=>{
+            console.log("git hub");
 
+        })
+            
+           
+    };
 
             return (
         <div>
@@ -33,10 +56,7 @@ export default function ViewUsers(){
                 </div>
 
                 <div className='productList'>
-                    
 
-                    
-                        
                         <label>Role</label>
                         <select onChange={(event) => setRole(event.target.value)}>
                             <option value="Users">Select A Role</option>
@@ -48,8 +68,7 @@ export default function ViewUsers(){
                         <button onClick={recieveUsersByRole}> Check Users By Role</button>
                     
                 </div>
-                
-                
+
                 <div className='grid'>
                     { userList.map((val,key) => {
                         return (
@@ -61,7 +80,7 @@ export default function ViewUsers(){
                                <br/>
                                <span>CONATACT NUMBER : </span> {val.contactNum}
                                 <br/>
-                               <button >DELETE</button>
+                               <button  onClick={()=>{handleDelete(val.u_id)}} >DELETE</button>
                             </div>
                        
                         )

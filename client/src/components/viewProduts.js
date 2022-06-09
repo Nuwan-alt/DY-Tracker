@@ -98,7 +98,7 @@ export default function ViewProducts(){
                                 <br/>
                                <button onClick={() =>
                                    
-                                   handleDelete(val.p_id)
+                                   handleDelete(val.u_id)
                                }>DELETE</button>
                             </div>
                        
