@@ -2,11 +2,19 @@ const express = require("express");
 const mariadb = require("mariadb");
 const cors = require("cors");
 const bodyParser = require("body-parser");
+const fileUpload = require("express-fileupload");
+const path = require("path");
+const fs = require("fs");
 const { type, status } = require("express/lib/response");
+const multer = require('multer');
+const util = require('util');
+const upload = require("express-fileupload");
 
 const app = express();
 app.use(express.json());
 app.use(cors());
+app.use(upload());
+app.use(express.static("./public"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
@@ -23,24 +31,29 @@ app.get('/',(req,res) =>{
     res.send("I'm connected");
 })
 
+
 // ======================= add new product ==============================================
-app.post('/new',async (req,res) => {
+
+app.post('/new', async (req,res) => {
+    // console.log(req.file);
+    
+    const URL =req.body.link;
     const title = req.body.title;
+    console.log("title:"+title);
     const quantity = req.body.quantity;
     const price = req.body.price;
     const category = req.body.category ;
     const s_email = req.body.s_email;
     
-
-    if (title == null || quantity == null || price==null || s_email==null){
+    if (title == null || quantity == null || price==null || s_email==null || URL==null  ){
         console.log("can't be empty");
     }
     
 
     try {
         const result = await db.query(
-            "INSERT INTO products (title, quantity , price,category,s_email) VALUES(?,?,?,?,?)",
-            [title,quantity,price,category,s_email]
+            "INSERT INTO products (title, quantity , price,category,s_email,url) VALUES(?,?,?,?,?,?)",
+            [title,quantity,price,category,s_email,URL]
         );
         res.send("data inserted");
     } catch (err) {
@@ -214,6 +227,8 @@ app.put('/make_admin/:id',async (req,res) =>{
     
     
 })
+
+
 
 
 // start the server

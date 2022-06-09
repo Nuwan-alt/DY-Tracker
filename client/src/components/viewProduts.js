@@ -87,7 +87,9 @@ export default function ViewProducts(){
                     { productList.map((val,key) => {
                         return (
                         
-                            <div className='setInVar'>
+                            <div className='setInVar' >
+                                
+                                
                                <span> TITLE :</span>  {val.title}
                                <br/>
                                <span>PRICE : </span> {val.price}
